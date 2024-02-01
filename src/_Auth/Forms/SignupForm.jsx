@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { LiaEyeSlashSolid } from "react-icons/lia";
 import { LiaEyeSolid } from "react-icons/lia";
@@ -13,24 +13,28 @@ import {
   useCreateAccount,
   useSignInAccount,
 } from "../../lib/react-query/queriesAndMutations";
+import { useUserContext } from "../../context/AuthContext";
+import Toast from "../../components/shared/Toast";
 
 const SignupForm = () => {
   const { mutateAsync: createUserAccount, isPending: isCreatingUser } =
     useCreateAccount();
   const { mutateAsync: signInAccount, isPending: isSigningIn } =
     useSignInAccount();
-
+  const { checkAuthenticatedUser, isLoading: isUserLoading } = useUserContext();
   const initialValues = {
     name: "",
     username: "",
     email: "",
     password: "",
   };
+  const navigate = useNavigate();
 
   const inputRef = useRef(null);
   const [isChecked, setIsChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isSignupHovered, setIsSignupHovered] = useState(false);
+  const [error, setError] = useState(false);
 
   // Handle State of checkbox
   const handleCheckboxChange = (e) => {
@@ -41,16 +45,22 @@ const SignupForm = () => {
   const onSubmit = async (values, { resetForm }) => {
     const newUser = await createUserAccount(values);
     if (!newUser) {
-      console.log("User not created. Please try again.");
+      setError(true);
       return;
     }
 
-    const session = await useSignInAccount({
+    const session = await signInAccount({
       email: values.email,
       password: values.password,
     });
-    console.log(session);
-    resetForm();
+
+    const isLoggedIn = await checkAuthenticatedUser();
+    if (isLoggedIn) {
+      resetForm();
+      navigate("/");
+    } else {
+      console.log("Sign up failed. Please try again.");
+    }
   };
 
   useEffect(() => {
@@ -64,22 +74,22 @@ const SignupForm = () => {
   });
 
   return (
-    <div className="mt-4">
-      <div className="flex-center flex-1 mb-3">
-        {" "}
+    <div className="pt-4">
+      <div className="flex-center flex-1 pb-3">
         <img
           src={logo}
           alt=" logo"
           className="w-[34px] h-[34px] mr-2 bg-cover rounded-full"
-        />{" "}
-        <h1 className="text-center text-[20px] text-black font-serif font-bold ">
+        />
+        <h1 className="text-center text-[20px] text-white font-serif font-bold ">
           Visual Story Share
         </h1>
       </div>
-      <h1 className="text-center text-[34px] text-black font-serif font-bold">
-        Welcome! Create Your Account
+      <h1 className="text-center text-[34px] text-white font-serif font-bold">
+        {/* <span className="hidden md:block text-white"> Welcome!</span> */}
+        <span className="text-zinc-700">Create Your Account</span>
       </h1>
-      <p className="mb-4 mt-2 text-center cursor-context-menu font-inter text-gray-400 hover:text-gray-800">
+      <p className="mb-4 mt-2 text-center cursor-context-menu font-serif text-gray-700 hover:text-black">
         To use visual story share first you must create an account!
       </p>
       <div className="flex-center">
@@ -99,7 +109,10 @@ const SignupForm = () => {
                 formik.touched.name && !isCreatingUser && formik.errors.name
               }
             />
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback
+              type="invalid"
+              className="font-bold text-gray-500"
+            >
               {formik.errors.name}
             </Form.Control.Feedback>
           </Form.Group>
@@ -113,7 +126,10 @@ const SignupForm = () => {
               {...formik.getFieldProps("username")}
               isInvalid={formik.touched.username && formik.errors.username}
             />
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback
+              type="invalid"
+              className="font-bold text-gray-500"
+            >
               {formik.errors.username}
             </Form.Control.Feedback>
           </Form.Group>
@@ -127,7 +143,10 @@ const SignupForm = () => {
               {...formik.getFieldProps("email")}
               isInvalid={formik.touched.email && formik.errors.email}
             />
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback
+              type="invalid"
+              className="font-bold text-gray-500"
+            >
               {formik.errors.email}
             </Form.Control.Feedback>
           </Form.Group>
@@ -167,7 +186,10 @@ const SignupForm = () => {
               )}
             </div>
             {
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback
+                type="invalid"
+                className="font-bold text-gray-500"
+              >
                 {formik.errors.password}
               </Form.Control.Feedback>
             }
@@ -190,7 +212,7 @@ const SignupForm = () => {
             }}
             variant="seconday"
             disabled={!isChecked || isCreatingUser}
-            className={` flex mx-auto w-full font-bold rounded-full hover:bg-green-400  border-stone-300  hover:text-white `}
+            className={` flex mx-auto w-full font-bold rounded-full hover:bg-green-400   border-stone-200  hover:text-white `}
             type="submit"
           >
             {isCreatingUser ? (
@@ -206,7 +228,7 @@ const SignupForm = () => {
               </>
             )}
           </Button>
-          <p className="text-center max-sm:mb-4 mb-1">
+          <p className="text-center max-sm:pb-4 pb-1">
             Have an account?{" "}
             <span>
               <Link
@@ -219,6 +241,7 @@ const SignupForm = () => {
           </p>
         </Form>
       </div>
+      {error && <Toast message="Account is not created, please try again." />}
     </div>
   );
 };

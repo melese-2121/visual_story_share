@@ -4,7 +4,7 @@ export const appwriteConfig = {
   projectId: import.meta.env.VITE_APPWRITE_PROJECT_ID,
   url: import.meta.env.VITE_APPWRITE_URL,
   databaseId: import.meta.env.VITE_APPWRITE_DATABASE_ID,
-  sotrageId: import.meta.env.VITE_APPWRITE_STORAGE_ID,
+  storageId: import.meta.env.VITE_APPWRITE_STORAGE_ID,
   usersCollectionId: import.meta.env.VITE_APPWRITE_USERS_COLLECTION_ID,
   postsCollectionId: import.meta.env.VITE_APPWRITE_POSTS_COLLECTION_ID,
   savedCollectionId: import.meta.env.VITE_APPWRITE_SAVED_COLLECTION_ID,
