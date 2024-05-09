@@ -50,38 +50,38 @@ const People = () => {
   console.log(searchedUsers);
 
   return (
-    <section className="w-full h-auto bg-stone-100 mt-3 overflow-scroll custom-scrollbar">
-      <div className="user-inner_container py-0">
-        <h2 className="h3-bold md:h2-bold w-full">Find people</h2>
-        <div className="flex justify-center items-center  px-5 w-full rounded-lg bg-white">
-          <i className="fas fa-search text-gray-500"></i>
-          <input
-            type="text"
-            placeholder="Search"
-            className="explore-search"
-            value={searchValue}
-            onChange={(e) => {
-              const { value } = e.target;
-              setSearchValue(value);
-            }}
-          />
+    <section className="w-full h-screen  bg-white pt-3 overflow-scroll custom-scrollbar">
+      <div className="mb-20">
+        <div className="user-inner_container  py-2 pb-3 bg-white fixed top-14 left-0 z-50 flex justify-between items-center w-full ">
+          <div className=" sm:px-5 md:px-4 mt-2">
+            <div className="flex justify-start md:w-28 border-1  bg-white items-center  px-2  rounded-lg">
+              <i className="fas fa-search text-gray-500 pr-2"></i>
+              <input
+                type="text"
+                placeholder="Search... "
+                className="explore-search "
+                value={searchValue}
+                onChange={(e) => {
+                  const { value } = e.target;
+                  setSearchValue(value);
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
-      <p className="text-center font-serif text-zinc-600 my-3">
-        You may know those people
-      </p>
 
-      <div>
+      <div className="mt-5">
         {shouldShowSearchResults ? (
           console.log(searchedUsers)
         ) : shouldShowPosts ? (
           <p className="text-light-4 mt-10 text-center w-full">End of posts</p>
         ) : (
-          <div>
+          <div className="mt-5 sm:px-10 ">
             {users?.pages.map((data) => (
               <div
                 key={data.documents}
-                className="grid grid-cols-1 mb-3 w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-3  "
+                className="grid grid-cols-1 mb-3 w-full  overflow-hidden sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-3  "
               >
                 {data.documents.map((user) => (
                   <div

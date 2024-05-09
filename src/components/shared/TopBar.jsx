@@ -26,18 +26,18 @@ const TopBar = () => {
   };
 
   return (
-    <nav className="topbar bg-white sm:hidden flex justify-between items-center px-4 py-2 rounded-b-sm transition-opacity ">
+    <nav className="topbar bg-[#823ef7] sm:hidden flex justify-between items-center rounded-b-sm transition-opacity ">
       <Link to="/">
-        <div className="flex justify-center items-center gap-1">
-          <img src={logo} alt="Logo" className="w-10 h-10 rounded-full" />
-          <h2 className="font-serif text-cyan-400 font-bold text-xl max-xs:hidden">
+        <div className="flex justify-center items-center ">
+          <img src={logo} alt="Logo" className="w-28 h-auto " />
+          {/* <h2 className="font-serif text-cyan-400 font-bold text-xl max-xs:hidden">
             VSS
-          </h2>
+          </h2> */}
         </div>
       </Link>
       <div className="flex justify-end gap-3 ">
         <Link onClick={() => signOut()}>
-          <BiLogOut className="w-8 h-8 text-cyan-400 hover: cursor-pointer hover:text-cyan-600" />
+          <BiLogOut className="w-8 h-8  cursor-pointer text-white font-bold hover:text-black duration-500" />
         </Link>
         <Link
           onClick={() => {

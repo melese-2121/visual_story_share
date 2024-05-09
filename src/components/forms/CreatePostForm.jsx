@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { FaSyncAlt } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 
 import { postValidationSchema } from "../../schemas/CreatePostSchema";
 import ImageUploader from "../../_Root/Pages/ImageUploader";
@@ -11,7 +13,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSmile } from "@fortawesome/free-regular-svg-icons";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
-import VoiceToText from "../VoiceToText";
 
 const CreatePostForm = () => {
   const textareaRef = useRef(null);
@@ -21,9 +22,9 @@ const CreatePostForm = () => {
     useCreatePost();
   const { user } = useUserContext();
   const [isEmojiPickerVisible, setIsEmojiPickerVisible] = useState(false);
-  const [caption, setCaption] = useState("");
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const onSubmit = async (values, { resetForm }) => {
+    setIsSubmitting(true);
     const readFileAsDataURL = (selectedImage) => {
       return new Promise((resolve) => {
         const reader = new FileReader();
@@ -40,10 +41,9 @@ const CreatePostForm = () => {
       file: selectedImage,
     });
 
-    if (newPost) {
-      resetForm();
-      navigate("/");
-    }
+    resetForm();
+    setIsSubmitting(false);
+    navigate("/");
   };
 
   const formik = useFormik({
@@ -95,12 +95,12 @@ const CreatePostForm = () => {
   };
   return (
     <form onSubmit={formik.handleSubmit} className="create-post-container">
-      <div className="mb-4">
+      <div className="mb-4 duration-500">
         <label htmlFor="caption" className="block  font-bold mb-2">
           Caption:
         </label>
         <div
-          className={`w-full p-2 outline-none  bg-white rounded ${
+          className={`w-full duration-500 p-2 outline-none  bg-white rounded ${
             formik.errors.caption && formik.touched.caption
               ? "border-stone-100"
               : "border-stone-200"
@@ -109,8 +109,8 @@ const CreatePostForm = () => {
           <textarea
             id="caption"
             name="caption"
-            className="w-full outline-none"
-            rows="3"
+            className="w-full outline-none duration-500"
+            rows={`1`}
             placeholder="Enter your caption"
             value={formik.values.caption}
             onChange={formik.handleChange}
@@ -118,22 +118,24 @@ const CreatePostForm = () => {
             ref={textareaRef}
           />
           <div
-            className="flex justify-end items-end "
+            className="flex justify-end items-end duration-500 relative "
             onClick={() => {
               setIsEmojiPickerVisible(!isEmojiPickerVisible);
             }}
           >
             <FontAwesomeIcon
+              onMouseEnter={() => {
+                setIsEmojiPickerVisible(true);
+              }}
               icon={faSmile}
-              className={` p-2  h-5 w-5 rounded-full hover:bg-gray-200  ${
+              className={` p-2  h-6 w-6 px-4 rounded-md duration-500 text-orange-500 cursor-pointer hover:bg-gray-200  ${
                 formik.values.caption && "text-orange-500"
-              } text-stone-500`}
+              } `}
             />
           </div>
           <div
-            className={`${
-              isEmojiPickerVisible ? "d-block" : "d-none"
-            } overflow-hidden emoji-mart-responsive-container`}
+            className={`${isEmojiPickerVisible ? "d-block" : "d-none"} flex-wrap
+             overflow-hidden duration-500 emoji-mart-responsive-container   w-full mx-auto`}
             onMouseEnter={() => {
               setIsEmojiPickerVisible(true);
             }}
@@ -209,13 +211,13 @@ const CreatePostForm = () => {
       <div className="flex justify-between mb-4">
         {/* ... (existing buttons) ... */}
 
-        <div className="flex ml-auto">
+        <div className="flex ml-auto gap-3">
           <button
             type="button"
             onClick={handleReset}
-            className="post-form-reset-button"
+            className="post-form-reset-button duration-500"
           >
-            Reset
+            <FaSyncAlt />
           </button>
 
           <button
@@ -223,14 +225,20 @@ const CreatePostForm = () => {
             onClick={handleCancel}
             className="post-form-cancel-button"
           >
-            Cancel
+            <MdCancel className="text-xl" />
           </button>
         </div>
       </div>
 
-      <div>
-        <button type="submit" className="post-form-submit-btn">
-          Submit
+      <div className="text-center w-full">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={`post-form-submit-btn duration-500 ${
+            isSubmitting && "bg-slate-100"
+          } `}
+        >
+          {isSubmitting ? "Submitting..." : "Post Now"}
         </button>
       </div>
     </form>

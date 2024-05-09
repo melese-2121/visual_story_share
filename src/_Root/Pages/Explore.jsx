@@ -37,7 +37,7 @@ const Explore = () => {
 
   if (!posts)
     return (
-      <div className="mt-28 mx-auto ">
+      <div className="mx-auto my-auto ">
         <PostLoading />
       </div>
     );
@@ -49,9 +49,15 @@ const Explore = () => {
 
   return (
     <div className="explore-container">
-      <div className="explore-inner_container">
-        <h2 className="h3-bold md:h2-bold w-full">Search Posts</h2>
-        <div className="flex justify-center items-center gap-x-2 px-10 w-full rounded-lg bg-white">
+      <div className="explore-inner_container px-[5%]">
+        <div className="flex space-between w-full justify-between">
+          <h2 className="h3-bold md:h2-bold w-full">Search Posts</h2>
+          <div className="flex-center gap-3 bg-gray-200 rounded-xl px-4 py-2 cursor-pointer">
+            <p className="small-medium md:base-medium text-gray-700">All</p>
+            <i className="fas fa-filter text-gray-500"></i>
+          </div>
+        </div>
+        <div className="flex justify-start items-center gap-x-2 w-[80%] px-2 rounded-lg bg-white">
           <i className="fas fa-search text-gray-500"></i>
           <input
             type="text"
@@ -65,15 +71,10 @@ const Explore = () => {
           />
         </div>
       </div>
-      <div className="flex-between w-full max-w-5xl mt-16 mb-7">
-        <h3 className="body-bold md:h3-bold">Popular Today</h3>
-
-        <div className="flex-center gap-3 bg-gray-200 rounded-xl px-4 py-2 cursor-pointer">
-          <p className="small-medium md:base-medium text-gray-700">All</p>
-          <i className="fas fa-filter text-gray-500"></i>
-        </div>
+      <div className="flex-between w-full px-[5%] max-w-5xl mt-4 mb-7 ">
+        <h3 className="body-bold font-normal text-gray-700">Popular Today</h3>
       </div>
-      <div className="flex flex-wrap gap-9 w-full max-w-5xl">
+      <div className="flex flex-wrap gap-9 w-full max-w-full mx-auto">
         {shouldShowSearchResults ? (
           <SearchResults
             isSearchFetching={isSearchFetching}
@@ -88,7 +89,7 @@ const Explore = () => {
         )}
       </div>
       {hasNextPage && !searchValue && (
-        <div ref={ref} className="mt-10">
+        <div ref={ref} className="mt-10  ">
           <PostLoading />
         </div>
       )}

@@ -88,9 +88,9 @@ const PostCard = ({ post, userId }) => {
   };
 
   return (
-    <div className=" bg-white border-2 border-slate-50  rounded-lg mx-auto shadow-md shadow-slate-200 max-md:w-[80%] md:w-[65%]  overflow-hidden">
-      <div className="relative w-full px-1 ">
-        <div className="py-1  pb-4 px-2 my-1 mb-2 rounded-lg bg-stone-100 ">
+    <div className="  w-screen  mx-auto     overflow-hidden">
+      <div className="relative max-sm:w-[70%] mx-auto border-2    border-slate-200  rounded-lg px-3 ">
+        <div className="py-1    pb-4 px-2 my-1  mb-2 rounded-lg ">
           <div className="flex justify-between gap-2">
             <div className="flex justify-between items-center gap-2">
               <Link to={`profile/${post.creator.id}`}>
@@ -130,78 +130,76 @@ const PostCard = ({ post, userId }) => {
             <img
               src={post.imgUrl}
               alt="Image"
-              className={`w-full object-cover mx-auto rounded-md  transition-transform duration-500 transform ${
-                isHovered ? "scale-110 shadow-lg rounded-lg" : ""
-              }`}
+              className={`min-w-[95%] max-w-full object-cover mx-auto rounded-md  transition-transform duration-500 transform ${
+                isHovered ? " border-1 duration-1000 rounded-lg " : ""
+              } `}
             />
           </Link>
-          <div
-            className={`absolute mt-3 px-5  flex justify-between items-center w-full ${
-              isVisible
-                ? "opacity-100"
-                : "opacity-0 transition-opacity duration-300"
-            }`}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
-            <div>
-              {tryingToLike ? (
-                <div className="ml-10">
-                  <LikeSaveLoader />
-                </div>
-              ) : (
-                <div className="flex justify-center items-center gap-1 mt-1">
-                  <FontAwesomeIcon
-                    icon={faHeart}
-                    className={`cursor-pointer ml-2 w-5 h-5 transition-colors 
+        </div>
+
+        <div
+          className={` mt-3 px-5  flex justify-between  w-full ${
+            isVisible
+              ? "opacity-100"
+              : "opacity-0 transition-opacity duration-300"
+          }`}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          <div>
+            {tryingToLike ? (
+              <div className="ml-10">
+                <LikeSaveLoader />
+              </div>
+            ) : (
+              <div className="flex justify-center items-center gap-1 mt-1">
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className={`cursor-pointer ml-2 w-5 h-5 transition-colors 
                 ${
                   likes.includes(userId)
                     ? "text-green-500 font-bold "
                     : "text-neutral-600 "
                 } `}
-                    onClick={handleLikeClick}
-                  />
-                  <p className="text-sm font-mono">{likes.length}</p>
-                </div>
-              )}
-            </div>
+                  onClick={handleLikeClick}
+                />
+                <p className="text-sm font-mono">{likes.length}</p>
+              </div>
+            )}
+          </div>
 
-            <div>
-              {isSaving || isDeletingSaved ? (
-                <LikeSaveLoader />
-              ) : (
-                <div className="flex justify-center items-center gap-1">
-                  <FontAwesomeIcon
-                    icon={faSave}
-                    className={`cursor-pointer ml-2 w-5 h-5 transition-colors ${
-                      isSaved ? "text-green-500 font-bold " : "text-neutral-600"
-                    }`}
-                    onClick={handleSaveClick}
-                  />
+          <div>
+            {isSaving || isDeletingSaved ? (
+              <LikeSaveLoader />
+            ) : (
+              <div className="flex justify-center items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faSave}
+                  className={`cursor-pointer ml-2 w-5 h-5 transition-colors ${
+                    isSaved ? "text-green-500 font-bold " : "text-neutral-600"
+                  }`}
+                  onClick={handleSaveClick}
+                />
 
-                  <p className="text-sm font-mono">Save</p>
-                </div>
-              )}
-            </div>
+                <p className="text-sm font-mono">Save</p>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-      {/* Comment icon and input bar */}
-      <div className=" flex justify-center items-center   px-3 w-full mt-5 my-2">
-        <FontAwesomeIcon
-          icon={faComment}
-          className="text-gray-500 cursor-pointer mr-2 mt-2"
-        />
-        <Form className="w-full">
-          <input
-            type="text"
-            id="commentInput"
-            placeholder="Add a comment..."
-            value={commentText}
-            onChange={handleInputChange}
-            className="border-none outline-none w-full text-sm mt-2 h-full py-2 "
-          />
-        </Form>
+        {/* Comment icon and input bar */}
+        <div className=" flex justify-center items-center text-center border-2 py-1 border-gray-200 focus:border-gray-500 rounded-md  px-2 w-full mt-3 my-2">
+          <FontAwesomeIcon icon={faComment} className="text-gray-500 mr-2 " />
+          <Form className="w-full">
+            <input
+              type="text"
+              id="commentInput"
+              placeholder="Add a comment..."
+              value={commentText}
+              onChange={handleInputChange}
+              className="border-none outline-none w-full text-sm h-full py-1 flex justify-center items-center "
+            />
+          </Form>
+        </div>
       </div>
     </div>
   );

@@ -16,16 +16,16 @@ const Home = () => {
   });
 
   return (
-    <section>
-      <hr className=" w-[80%] mx-auto border-gray-300 " />
+    <section className="w-full h-full">
+      {/* <hr className=" w-[80%] mx-auto border-gray-300 " />
       <div className="md:hidden footer-people z-50 py-2 rounded-b-full flex justify-center items-center">
         <FooterPeople />
-      </div>
+      </div> */}
       <section
-        className="mx-auto bg-stone-100 pt-3 overflow-y-auto max-md:w-[90%] md:w-[70%]  h-screen"
+        className="mx-auto scroll-dsplay-none   pt-3   h-screen"
         style={{ scrollbarColor: "white" }}
       >
-        <div>
+        <div className="w-full h-full">
           {isPostLoading ? (
             <PostLoading />
           ) : (

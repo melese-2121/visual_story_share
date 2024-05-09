@@ -11,9 +11,9 @@ const RootLayout = () => {
   if (!isAuthenticated) navigate("/sign-in");
 
   return (
-    <section className="h-screen md:flex bg-stone-100">
+    <section className="h-screen  w-screen scroll-dsplay-none md:flex ">
       <TopBar />
-      <section className="flex justify-between  w-full h-full">
+      <section className="flex justify-between  w-screen h-full">
         <LeftSideBar />
         <Outlet />
       </section>
