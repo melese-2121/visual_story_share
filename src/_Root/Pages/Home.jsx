@@ -4,7 +4,7 @@ import PostLoading from "../../components/shared/PostLoading";
 import { useGetRecentPosts } from "../../lib/react-query/queriesAndMutations";
 import { useUserContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import FooterPeople from "../../components/shared/FooterPeople";
+import Post from "../Pages/Post";
 
 const Home = () => {
   const { data: posts, isPending: isPostLoading } = useGetRecentPosts();
@@ -16,13 +16,13 @@ const Home = () => {
   });
 
   return (
-    <section className="w-full h-full">
+    <section className="w-full h-full flex justify-between">
       {/* <hr className=" w-[80%] mx-auto border-gray-300 " />
       <div className="md:hidden footer-people z-50 py-2 rounded-b-full flex justify-center items-center">
         <FooterPeople />
       </div> */}
       <section
-        className="mx-auto scroll-dsplay-none   pt-3   h-screen"
+        className="mx-auto scroll-dsplay-none w-[600px]  pt-3   h-screen"
         style={{ scrollbarColor: "white" }}
       >
         <div className="w-full h-full">

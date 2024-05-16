@@ -95,7 +95,7 @@ const CreatePostForm = () => {
   };
   return (
     <form onSubmit={formik.handleSubmit} className="create-post-container">
-      <div className="mb-4 duration-500">
+      <div className="mb-4 duration-500 ">
         <label htmlFor="caption" className="block  font-bold mb-2">
           Caption:
         </label>

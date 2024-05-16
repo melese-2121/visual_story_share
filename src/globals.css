@@ -10,7 +10,10 @@
   }
 
   body {
-    @apply text-black min-h-screen font-inter z-10;
+    @apply text-black min-h-screen font-inter z-10 bg-stone-50;
+  }
+  ::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -135,11 +138,11 @@
 
   /* Explore */
   .explore-container {
-    @apply flex flex-col flex-1 bg-stone-50 items-center overflow-scroll py-6 px-5 md:p-14 custom-scrollbar;
+    @apply flex flex-col  items-center overflow-y-scroll   py-6 px-5;
   }
 
   .explore-inner_container {
-    @apply max-w-5xl flex flex-col items-center w-full gap-6 md:gap-9;
+    @apply flex flex-col  items-center gap-6 md:gap-9;
   }
   .user-inner_container {
     @apply max-w-5xl flex flex-col items-center gap-6 px-5 py-0 md:gap-9;
@@ -221,7 +224,7 @@
 
   /* Grid Post List */
   .grid-container {
-    @apply w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-7 max-w-5xl px-5;
+    @apply grid grid-cols-1 gap-7  sm:gap-y-7  px-5 sm:px-0;
   }
 
   .grid-post_link {
@@ -303,7 +306,7 @@
   }
 
   .create-post-form {
-    @apply w-full bg-stone-100 max-md:pt-5 pt-10 mx-1 rounded-md;
+    @apply w-full bg-stone-100 sm:bg-stone-50 overflow-scroll border-l max-md:pt-5 pt-10 mx-1 rounded-md sm:rounded-none;
   }
 }
 .form-label {
@@ -326,7 +329,7 @@
 }
 
 .create-post-container {
-  @apply max-xs:px-5 max-md:px-10 max-lg:px-14  lg:px-28 mx-auto mt-8 pb-5;
+  @apply max-xs:px-5 max-md:px-10 max-lg:px-16 lg:px-5 mx-auto mt-8 pb-5  overflow-scroll;
 }
 
 .post-form-cancel-button {
@@ -338,7 +341,7 @@
 }
 
 .post-form-submit-btn {
-  @apply bg-[#9f6df7] border border-[#9f6df7] duration-500  hover:border-white hover:bg-[#823ef7] w-[80%] text-gray-100 hover:text-white font-bold py-2 px-4 rounded-md mx-auto;
+  @apply border border-[#9f6df7] duration-500  hover:border-white hover:bg-[#823ef7] bg-[#9f6df7] w-[80%] text-gray-100 hover:text-white font-bold py-2 px-4 rounded-md mx-auto;
 }
 
 .emoji-mart-responsive-container {
@@ -352,4 +355,9 @@
 
 .saved-container {
   @apply w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-7 max-w-5xl px-5;
+}
+
+.explore-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
 }

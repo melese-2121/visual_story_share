@@ -19,7 +19,7 @@ const Saved = () => {
 
   if (!savedPosts)
     return (
-      <div className="mt-28 mx-auto ">
+      <div className="w-full h-full text-center mx-auto ">
         <PostLoading />
       </div>
     );

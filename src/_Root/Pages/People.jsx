@@ -47,19 +47,18 @@ const People = () => {
     }
   };
 
-  console.log(searchedUsers);
-
   return (
-    <section className="w-full h-screen  bg-white pt-3 overflow-scroll custom-scrollbar">
+    <section className="w-full h-screen    pt-3 overflow-scroll custom-scrollbar">
       <div className="mb-20">
-        <div className="user-inner_container  py-2 pb-3 bg-white fixed top-14 left-0 z-50 flex justify-between items-center w-full ">
+        <div className="user-inner_container  py-2 pb-3 max-lg:bg-[#823ef7]  fixed top-1 left-0  flex justify-between items-center w-full ">
           <div className=" sm:px-5 md:px-4 mt-2">
-            <div className="flex justify-start md:w-28 border-1  bg-white items-center  px-2  rounded-lg">
+            <div className="flex justify-start  border-1 max-lg:mt-10 bg-white  items-center  px-2  rounded-3xl">
               <i className="fas fa-search text-gray-500 pr-2"></i>
               <input
                 type="text"
                 placeholder="Search... "
-                className="explore-search "
+                className="explore-search rounded-3xl"
+                sty
                 value={searchValue}
                 onChange={(e) => {
                   const { value } = e.target;
@@ -77,16 +76,16 @@ const People = () => {
         ) : shouldShowPosts ? (
           <p className="text-light-4 mt-10 text-center w-full">End of posts</p>
         ) : (
-          <div className="mt-5 sm:px-10 ">
+          <div className="mt-5 sm:px-10  ">
             {users?.pages.map((data) => (
               <div
                 key={data.documents}
-                className="grid grid-cols-1 mb-3 w-full  overflow-hidden sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-3  "
+                className="grid grid-cols-1 mb-3 w-full   overflow-hidden sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-3  "
               >
                 {data.documents.map((user) => (
                   <div
                     key={user.$id}
-                    className="mx-auto bg-slate-900 w-[80%] rounded-md py-3 flex  items-center"
+                    className="mx-auto bg-slate-900 w-[100%] rounded-md py-3 flex  items-center"
                   >
                     <img
                       src={user.imgUrl}
@@ -111,7 +110,7 @@ const People = () => {
       </div>
 
       {hasNextPage && !searchValue && (
-        <div ref={ref} className="mb-5 pt-2 bg-stone-100 ">
+        <div ref={ref} className="  ">
           <PostLoading />
         </div>
       )}

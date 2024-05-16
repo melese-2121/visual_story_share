@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-regular-svg-icons";
 import { faHeart, faSave } from "@fortawesome/free-solid-svg-icons";
-import { FaPencilAlt } from "react-icons/fa";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { TimeAgo } from "../../utils/TimeAgo";
@@ -88,8 +87,8 @@ const PostCard = ({ post, userId }) => {
   };
 
   return (
-    <div className="  w-screen  mx-auto     overflow-hidden">
-      <div className="relative max-sm:w-[70%] mx-auto border-2    border-slate-200  rounded-lg px-3 ">
+    <div className="mx-auto md:max-w-[600px] max-lg:w-[80%] max-lg:border max-lg:rounded-md bg-white   overflow-hidden">
+      <div className="relative  mx-auto border-2    border-white  rounded-lg px-3 ">
         <div className="py-1    pb-4 px-2 my-1  mb-2 rounded-lg ">
           <div className="flex justify-between gap-2">
             <div className="flex justify-between items-center gap-2">
@@ -130,7 +129,7 @@ const PostCard = ({ post, userId }) => {
             <img
               src={post.imgUrl}
               alt="Image"
-              className={`min-w-[95%] max-w-full object-cover mx-auto rounded-md  transition-transform duration-500 transform ${
+              className={`w-[60%] max-sm:w-[90%] h-auto max-w-full  mx-auto rounded-md  transition-transform duration-500 transform ${
                 isHovered ? " border-1 duration-1000 rounded-lg " : ""
               } `}
             />
@@ -138,7 +137,7 @@ const PostCard = ({ post, userId }) => {
         </div>
 
         <div
-          className={` mt-3 px-5  flex justify-between  w-full ${
+          className={` mt-5 px-5  flex justify-around  w-full ${
             isVisible
               ? "opacity-100"
               : "opacity-0 transition-opacity duration-300"
@@ -187,7 +186,7 @@ const PostCard = ({ post, userId }) => {
           </div>
         </div>
         {/* Comment icon and input bar */}
-        <div className=" flex justify-center items-center text-center border-2 py-1 border-gray-200 focus:border-gray-500 rounded-md  px-2 w-full mt-3 my-2">
+        <div className=" flex justify-center mt-5 items-center text-center border-2 py-1 border-gray-200 focus:border-gray-500 rounded-md  px-2 w-full mt-3 my-2">
           <FontAwesomeIcon icon={faComment} className="text-gray-500 mr-2 " />
           <Form className="w-full">
             <input

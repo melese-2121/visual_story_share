@@ -6,15 +6,15 @@ const GridPostList = ({ posts, showUser = true, showStats = true }) => {
   const { user } = useUserContext();
 
   return (
-    <ul className="grid-container py-2 gap-y-2 ">
+    <ul className="grid-container   py-2 gap-y-2 ">
       {posts.map((post) => (
         <li
           key={post.$id}
-          className="relative w-[90%] bg-white shadow-2xl rounded-lg p-4 mx-auto "
+          className="relative w-[90%]  sm:w-full bg-white shadow-2xl rounded-lg p-4 sm:p-0 mx-auto "
         >
           <div className=" -mt-12 mb-4 border-x-2 rounded-2xl px-2 py-2 border-t-2 border-stone-200 bg-white">
             {showUser && (
-              <div className="flex  items-center  justify-center gap-2 flex-1  ">
+              <div className="flex items-center justify-center gap-2 flex-1">
                 <img
                   src={
                     post.creator.imgUrl ||

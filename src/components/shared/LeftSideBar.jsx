@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { logo } from "../../assets/images";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { BiLogOut } from "react-icons/bi";
 import { useSignInAccount } from "../../lib/react-query/queriesAndMutations";
 import { useUserContext } from "../../context/AuthContext";
 import { sidebarLinks } from "../../constants";
@@ -29,7 +28,7 @@ const LeftSideBar = () => {
     <nav
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
-      className="left-sidebar-containero max-sm:hidden overflow-hidden bg-[#823ef7] h-full  w-20 hover:w-[240px] z-50 fixed duration-500"
+      className="left-sidebar-containe max-sm:hidden overflow-hidden bg-[#823ef7] h-full  w-[80px] hover:w-[240px] z-50 fixed duration-500"
     >
       <Link to="/">
         <div className="flex justify-center items-center gap-1 pt-2 mb-20  ">
