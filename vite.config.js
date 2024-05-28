@@ -5,5 +5,8 @@ import { ghPages } from "vite-plugin-gh-pages";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), ghPages()],
-  base: "/visual_story_share/",
+  base: "/",
+  build: {
+    outDir: "dist",
+  },
 });
