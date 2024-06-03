@@ -87,7 +87,7 @@ const PostCard = ({ post, userId }) => {
   };
 
   return (
-    <div className="mx-auto md:max-w-[600px] max-lg:w-[80%] max-lg:border max-lg:rounded-md bg-white   overflow-hidden">
+    <div className="mx-auto md:max-w-[500px] max-lg:w-[80%] max-lg:border max-lg:rounded-md bg-white   overflow-hidden">
       <div className="relative  mx-auto border-2    border-white  rounded-lg px-3 ">
         <div className="py-1    pb-4 px-2 my-1  mb-2 rounded-lg ">
           <div className="flex justify-between gap-2">
@@ -129,7 +129,7 @@ const PostCard = ({ post, userId }) => {
             <img
               src={post.imgUrl}
               alt="Image"
-              className={`w-[60%] max-sm:w-[90%] h-auto max-w-full  mx-auto rounded-md  transition-transform duration-500 transform ${
+              className={`min-w-[50%] max-w-[100%] h-auto object-cover  mx-auto rounded-md  transition-transform duration-500 transform ${
                 isHovered ? " border-1 duration-1000 rounded-lg " : ""
               } `}
             />
